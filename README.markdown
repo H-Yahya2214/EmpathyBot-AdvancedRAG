@@ -1,91 +1,147 @@
-# EmpathyBot - Emotion-Aware Chatbot
+# =============================================================================
+# 📁 .gitignore
+# =============================================================================
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-## Overview
-EmpathyBot is an AI-powered chatbot that detects emotions in user input and generates empathetic responses using a Retrieval-Augmented Generation (RAG) approach. Built with **Streamlit**, **DistilBERT** for emotion classification, and **FAISS** for efficient retrieval, this project combines natural language processing (NLP) and vector search to provide context-aware, emotionally intelligent responses.
+# Streamlit
+.streamlit/
+.streamlit_cache/
 
-## Features
-- **Emotion Detection**: Uses `bhadresh-savani/distilbert-base-uncased-emotion` to classify emotions (joy, sadness, anger, fear, surprise, neutral) in user text.
-- **Empathetic Responses**: Retrieves relevant response templates from a predefined corpus using `all-MiniLM-L6-v2` embeddings and FAISS for similarity search.
-- **Interactive UI**: Streamlit-based interface with chat history, animated sidebar, and example prompts.
-- **Disclaimer**: Includes a note encouraging users to seek professional help for serious issues, as the bot is not a therapist.
+# AI Models & Data
+*.index
+*_embeddings.npy
+empathetic_corpus.json
 
-## Requirements
+# Audio files
+*.wav
+*.mp3
+*.m4a
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# =============================================================================
+# 📁 README.md
+# =============================================================================
+# 🤖 Empathetic AI Chatbot
+
+An advanced conversational AI system that combines emotion detection, empathetic response generation, and speech capabilities to create meaningful, supportive interactions.
+
+## 🌟 Features
+
+- **🎭 Advanced Emotion Detection**: Uses DistilBERT to identify 6+ emotions with confidence scores
+- **💬 Empathetic Response Generation**: RAG-powered system with 30+ contextual response templates
+- **⚡ Semantic Search**: FAISS vector search with sentence transformers for relevant response retrieval
+- **🎤 Full Speech Support**: Speech-to-text input and text-to-speech output
+- **📊 Conversation Analytics**: Real-time emotion tracking and conversation statistics
+- **🎨 Modern UI**: Beautiful Streamlit interface with custom CSS and responsive design
+
+## 🚀 Quick Start
+
+### Prerequisites
 - Python 3.8+
-- Libraries:
-  ```bash
-  pip install streamlit pandas numpy transformers sentence-transformers faiss-cpu
-  ```
+- pip package manager
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/empathybot.git
-   cd empathybot
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Run the Streamlit app:
-   ```bash
-   streamlit run app.py
-   ```
+### Installation
 
-## Usage
-1. Launch the app using the command above.
-2. Enter a message in the text input field (e.g., "I just got a promotion and I’m so happy! 🎉").
-3. Click **Submit** to receive an empathetic response based on the detected emotion.
-4. View the chat history and retrieved response templates in the UI.
+1. **Clone or create the project:**
+```bash
+mkdir empathetic-chatbot
+cd empathetic-chatbot
+```
 
-## Example
-**Input**: "I’m feeling really down today because of work 😞"  
-**Output**:  
-- Emotion: sadness (score: 0.95)  
-- Response: "That sounds really tough — I'm here to listen if you want to share more.  
-  (Disclaimer: I'm not a therapist; please seek professional help for serious issues.)"
+2. **Create virtual environment:**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-## Project Structure
-- `app.py`: Main Streamlit application script.
-- `requirements.txt`: List of required Python packages.
-- `README.md`: This file.
+3. **Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
 
-## How It Works
-1. **Emotion Classification**:
-   - Uses DistilBERT to predict the dominant emotion in the user's input.
-   - Returns the emotion label and confidence score.
-2. **Response Retrieval**:
-   - Encodes user input and corpus texts using `all-MiniLM-L6-v2`.
-   - Performs similarity search with FAISS to retrieve top-k relevant response templates.
-   - Prioritizes templates matching the detected emotion.
-3. **UI Rendering**:
-   - Displays chat history with styled user and bot messages.
-   - Shows retrieved templates in an expandable section.
-   - Includes an animated sidebar with random greetings and example prompts.
+4. **Run the application:**
+```bash
+streamlit run app.py
+```
 
-## Limitations
-- The bot is not a substitute for professional mental health support.
-- Emotion detection accuracy depends on the DistilBERT model and input clarity.
-- The corpus is predefined and may not cover all scenarios.
-- FAISS index is built in-memory and not persisted.
+5. **Open your browser** to `http://localhost:8501`
 
-## Future Improvements
-- Expand the response corpus for more diverse replies.
-- Persist the FAISS index for faster startup.
-- Add support for multilingual emotion detection.
-- Integrate real-time feedback to refine responses.
+## 📂 Project Structure
 
-## Contributing
-Contributions are welcome! Please:
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature-name`).
-3. Commit changes (`git commit -m 'Add feature'`).
-4. Push to the branch (`git push origin feature-name`).
-5. Open a pull request.
+```
+empathetic-chatbot/
+├── app.py                      # Main Streamlit application
+├── requirements.txt            # Python dependencies
+├── README.md                  # Project documentation
+├── .gitignore                 # Git ignore rules
+├── .streamlit_cache/          # Cached models and data
+│   ├── faiss_index.index     # FAISS vector index
+│   └── faiss_index_embeddings.npy  # Precomputed embeddings
+└── empathetic_corpus.json     # Response templates (auto-generated)
+```
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## 🛠️ Technical Architecture
 
-## Acknowledgments
-- Built with [Streamlit](https://streamlit.io/), [Hugging Face Transformers](https://huggingface.co/), [Sentence Transformers](https://sbert.net/), and [FAISS](https://github.com/facebookresearch/faiss).
-- Emotion model: `bhadresh-savani/distilbert-base-uncased-emotion`.
-- Embedding model: `all-MiniLM-L6-v2`.
+### Core Components
+
+1. **Emotion Detection Pipeline**
+   - Model: `bhadresh-savani/distilbert-base-uncased-emotion`
+   - Detects: joy, sadness, anger, fear, surprise, love, neutral
+   - Real-time classification with confidence scores
+
+2. **RAG System (Retrieval-Augmented Generation)**
+   - Embeddings: `all-MiniLM-L6-v2` sentence transformer
+   - Vector Store: FAISS with cosine similarity
+   - Response Templates: 30+ empathetic responses per emotion
+
+3. **Speech Processing**
+   - STT: Google Speech Recognition API
+   - TTS: Google Text-to-Speech (gTTS)
+   - Audio Format: WAV input, MP3 output
+
+4. **Web Interface**
+   - Framework: Streamlit with custom CSS
+   - Features: Real-time chat, voice recording, emotion visualization
+   - Responsive design with sidebar controls
+
+### Data Flow
+
+```
+User Input → Emotion Detection → RAG Retrieval → Response Generation → TTS Output
+     ↓              ↓                 ↓               ↓              ↓
+  Text/Voice → DistilBERT → FAISS Search → Template → Audio
+```
+
+## 🎯 Usage Guide
+
+### Text Chat
+1. Type your message in the text area
+2. Click "Send Message" to get an empathetic response
+3. View detected emotion and confidence score
+
+### Voice Chat  
+1. Click the microphone button to record
+2. Speak your message clearly
+3. Click "
