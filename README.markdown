@@ -41,5 +41,5 @@ See `requirements.txt` for a full list of Python packages. Key dependencies incl
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/<your-username>/EmpathyBot.git
+git clone https://github.com/H-Yahya2214/EmpathyBot-AdvancedRAG.git
 cd EmpathyBot
